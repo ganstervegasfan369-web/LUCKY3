@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>LION KING LUCKY NUMBERS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(circle at top, #1b1b1b, #000);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 380px;
+    text-align: center;
+}
+
+.numbers-frame {
+    background: linear-gradient(145deg, #0f0f0f, #1a1a1a);
+    border: 2px solid gold;
+    border-radius: 22px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.35);
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: gold;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    font-size: 13px;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.section {
+    margin-bottom: 14px;
+}
+
+.section-title {
+    font-size: 14px;
+    color: #ffd700;
+    margin-bottom: 6px;
+    text-align: left;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.num {
+    background: linear-gradient(145deg, #111, #222);
+    border: 1px solid gold;
+    border-radius: 10px;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffd700;
+}
+
+.buttons {
+    margin-top: 18px;
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.generate {
+    background: linear-gradient(145deg, gold, #b8860b);
+    color: #000;
+}
+
+.generate:hover {
+    transform: scale(1.05);
+}
+
+.copy {
+    background: #222;
+    color: gold;
+    border: 1px solid gold;
+}
+
+.copy:hover {
+    background: gold;
+    color: #000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+    <!-- NUMBERS ONLY (SCREENSHOT AREA) -->
+    <div class="numbers-frame" id="numbersFrame">
+        <div class="title">🦁 LION KING LUCKY NUMBERS 🦁</div>
+        <div class="subtitle">Luxury Random Generator</div>
+
+        <div id="numbersContainer"></div>
+    </div>
+
+    <!-- BUTTONS OUTSIDE -->
+    <div class="buttons">
+        <button class="generate" onclick="generateAll()">GENERATE</button>
+        <button class="copy" onclick="copyAll()">COPY</button>
+    </div>
+
+</div>
+
+<script>
+function randomNumber(digits) {
+    const min = Math.pow(10, digits - 1);
+    const max = Math.pow(10, digits) - 1;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function createSection(digits) {
+    let html = `<div class="section">
+        <div class="section-title">${digits}-DIGIT LUCKY NUMBERS</div>
+        <div class="grid">`;
+    for (let i = 0; i < 5; i++) {
+        html += `<div class="num">${randomNumber(digits)}</div>`;
+    }
+    html += `</div></div>`;
+    return html;
+}
+
+function generateAll() {
+    const container = document.getElementById("numbersContainer");
+    container.innerHTML = "";
+    for (let d = 1; d <= 5; d++) {
+        container.innerHTML += createSection(d);
+    }
+}
+
+function copyAll() {
+    const nums = [...document.querySelectorAll(".num")]
+        .map(n => n.textContent)
+        .join("  ");
+    navigator.clipboard.writeText("LION KING LUCKY NUMBERS:\n" + nums);
+    alert("All lucky numbers copied!");
+}
+
+// Auto generate on load
+generateAll();
+</script>
+
+</body>
+  </html>
